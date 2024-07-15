@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  /* color: white; */
+}
+
+.dummy{
+  height: 1000vh;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+html{
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+
+.scroll{
+  scroll-snap-align: center;
+}
+
+body {
+  background-color: #24242f;
+  overflow-x: hidden;
+}
+
+section{
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading{
+  color: white;
+  text-align: center;
+  max-width: 70vw;
+  z-index: 5;
+  font-size: 1.4em;
+  margin-top: 3em;
+  max-width: 700px;
+}
+.heading h1 {
+  text-transform: uppercase;
+}
+
+.instruAbout{
+  position: fixed;
+  max-width: 35vw;
+  left: 25%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 5;
+  /* backdrop-filter: blur(1em); */
+  font-size: 1.2em;
+  opacity: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.instruAbout h2{
+  color: white;
+  font-size: 2.5rem;
+}
+
+.reach {
+  color: white;
+  display: flex;
+  position: fixed;
+  top: 50%;
+  gap:19em;
+  opacity: 0;
+  font-size: 2em;
+  transform: translateY(-50%);
+}
+
+.reach span{
+  font-size: 1.5em;
+}
+
+.design{
+  color: white;
+  display: flex;
+  position: fixed;
+  top: 50%;
+  gap: 18em;
+  opacity: 0;
+  font-size: 2em;
+  transform: translateY(-50%);
+}
+
+.design span{
+  font-size: 1.5em;
+}
+
+.logo{
+  z-index: 5;
+  font-family: "Orbitron", sans-serif;
+  position: fixed;
+  left: 50%;
+  width: 100vw;
+  bottom: 10%;
+  text-align: center;
+  background-color: #24242f;
+  transform: translateX(-50%);
+}
+
+.logo h1{
+  font-family: "Orbitron", sans-serif;
+  font-weight: 400;
+  font-size: 7em;
+  color: #F05223;
+}
+
+.logo h1 span{
+  font-weight: 600;
+  font-family: "Orbitron", sans-serif;
+}
+
+/* #sec1 {
+  background-color: rgba(119, 144, 166, 0.3);
+}
+#sec2 {
+  background-color: rgba(119, 166, 147, 0.3);
+}
+#sec3 {
+  background-color: rgba(166, 144, 119, 0.3);
+  height: 30vh;
+} */
+
+#sec2{
+  text-transform: uppercase;
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  color: #fff;
+  font-size: 2em;
+  width: 100vw;
+  height: fit-content;
+  display: inline;
+  text-align: center;
+
+}
+
+.sec2{
+  opacity: 0;
+}
+
+#sec2 span{
+  font-size: 1.7em;
+}
+
+
+.webgl {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
+
+/* #transitionButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  z-index: 10;
+} */
+
+.gear0{
+  background-color: rgba(0, 0, 0,0.1);
+}
+.gear1{
+  background-color: rgba(169, 44, 44, 0.1);
+}
+.gear2{
+  background-color: rgba(169, 183, 45, 0.1);
+}
+.gear3{
+  background-color: rgba(36, 193, 49, 0.1);
+}
+.gear4{
+  background-color: rgba(40, 131, 192, 0.1);
+}
+.gear5{
+  background-color: rgba(154, 28, 196, 0.1);
+}
+.gear6{
+  background-color: rgba(196, 28, 120, 0.1);
+}
+.gear7{
+  background-color: rgba(214, 27, 27, 0.1);
+}
+
+/* .pressureMat {
+  background-color: rgba(0, 0, 0,0.1);
+  height: 16%;
+  border: 1px solid red;
+  width: 100%;
+} */
+
+/* .pressureImages {
+  
+} */
+
+.gear0{
+  height: 70vh;
+}
+
+.pressureDivs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  gap: 5em;
+
+}
+
+.gear1 div {
+  width: 300px;
+}
+
+.shutter {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  z-index: 30;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.pressureDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.pressureDivs {
+  z-index: 20;
+}
+
+.pressureMat {
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.triggerSceneChange{
+  height: 10vh;
+  /* background-color: rgba(195, 21, 21, 0.46); */
+}
