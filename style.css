@@ -17,7 +17,7 @@
 
 html.lenis, html.lenis body {
   height: 100svh;
-  overflow-y: scroll;
+  overflow-y: auto;
   
 }
 
