@@ -16,7 +16,8 @@
 }
 
 html.lenis, html.lenis body {
-  height: auto;
+  height: 100svh;
+  
 }
 
 .lenis.lenis-smooth {
