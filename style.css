@@ -50,6 +50,11 @@ body {
   overflow-x: hidden;
 }
 
+.body{
+   width: 100vw;
+   overflow-x: hidden:
+}
+
 section{
   height: 100vh;
   z-index: 5;
