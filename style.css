@@ -7,9 +7,12 @@
   font-family: Arial, Helvetica, sans-serif;
   /* color: white; */
 }
+/* 
+.body{
+} */
 
 .dummy{
-  height: 1000vh;
+  min-height: 1500vh;
 }
 
 html.lenis, html.lenis body {
@@ -94,8 +97,10 @@ section{
   color: white;
   display: flex;
   position: fixed;
+  justify-content: center;
   top: 50%;
-  gap:19em;
+  gap :19em;
+  width: 100%;
   opacity: 0;
   font-size: 2em;
   transform: translateY(-50%);
@@ -113,6 +118,7 @@ section{
   gap: 18em;
   opacity: 0;
   font-size: 2em;
+  padding-right: 40px;
   transform: translateY(-50%);
 }
 
@@ -199,29 +205,28 @@ section{
   z-index: 10;
 } */
 
-.gear0{
-  background-color: rgba(0, 0, 0,0.1);
-}
+/* .gear0{
+} */
 .gear1{
-  background-color: rgba(169, 44, 44, 0.1);
+  opacity: 0;
 }
 .gear2{
-  background-color: rgba(169, 183, 45, 0.1);
+  opacity: 0;
 }
 .gear3{
-  background-color: rgba(36, 193, 49, 0.1);
+  opacity: 0;
 }
 .gear4{
-  background-color: rgba(40, 131, 192, 0.1);
+  opacity: 0;
 }
 .gear5{
-  background-color: rgba(154, 28, 196, 0.1);
+  opacity: 0;
 }
 .gear6{
-  background-color: rgba(196, 28, 120, 0.1);
+  opacity: 0;
 }
 .gear7{
-  background-color: rgba(214, 27, 27, 0.1);
+  opacity: 0;
 }
 
 /* .pressureMat {
@@ -252,9 +257,6 @@ section{
 
 }
 
-.gear1 div {
-  width: 300px;
-}
 
 .shutter {
   height: 100vh;
@@ -263,6 +265,8 @@ section{
   z-index: 30;
   position: fixed;
   top: 0;
+  opacity: 0;
+  pointer-events: none;
   left: 0;
 }
 
@@ -275,6 +279,8 @@ section{
   z-index: 20;
 }
 
+
+
 .pressureMat {
   color: white;
   font-size: 1.3em;
@@ -285,7 +291,317 @@ section{
   text-align: center;
 }
 
+.temeratureDivs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* gap: 8em; */
+
+}
+
+
+.temeratureDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.temperatureMat{
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+
+
+
+.flowDivs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* gap: 8em; */
+
+}
+
+
+.flowDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.flowMat{
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+
+.samplePreparationDivs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* gap: 8em; */
+
+}
+
+
+.samplePreparationDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.sampleMat{
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+.superCriticleDivs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* gap: 8em; */
+
+}
+
+
+.superCriticleDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.superCriticleMat{
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+
+
+.heatExchangeDivs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* gap: 8em; */
+
+}
+
+
+.heatExchangeDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.heatExchangeMat{
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+
+
+.applicationDivs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  /* gap: 8em; */
+
+}
+
+
+.applicationDivs #line{
+  height: 100vh;
+  border: 3px solid rgba(255, 255, 255, 0.44);
+}
+
+.applicationMat{
+  color: white;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
 .triggerSceneChange{
   height: 10vh;
   /* background-color: rgba(195, 21, 21, 0.46); */
+}
+
+
+@media screen and (max-width: 800px) {
+  :root{
+    font-size: smaller;
+  }
+
+  .heading{
+    padding: 0 30px;
+  }
+
+  .reach{
+    font-size: 1.6em;
+  }
+
+  .design{
+    font-size: 1.6em;
+    padding-left: 30px;
+  }
+
+  .logo{
+    font-size: 0.9rem;
+  }
+
+  .pressureDivs,.flowDivs, .temeratureDivs, .applicationDivs, .heatExchangeDivs,  .samplePreparationDivs{
+    width: 100vw;
+    gap: 0.1em;
+  }
+
+  .pressureMat, .flowMat, .temperatureMat, .applicationMat, .heatExchangeMat, .sampleMat{
+    width: 30%;
+  }
+
+  :is(.pressureMat, .flowMat, .temperatureMat, .applicationMat, .heatExchangeMat, .superCriticleMat, .sampleMat) a{
+    display: inline-block;
+    width: 100%;
+  }
+
+  :is(.pressureMat, .flowMat, .temperatureMat, .applicationMat, .heatExchangeMat, .superCriticleMat, .sampleMat) img{
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+
+@media screen and (max-width:600px) {
+  :root{
+    font-size: 0.7rem;
+  }
+
+  .instruAbout{
+    width: 100vw;
+    left: 0;
+    top: 10%;
+    transform: translate(0,0);
+    max-width: none;
+    padding: 0 30px;
+  }
+
+  .reach{
+    top: 0;
+    left: 0;
+    transform: translate(0,0);
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 100px;
+  }
+
+  .design{
+    top: 0;
+    left: 0;
+    transform: translate(0,0);
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    justify-content: center;
+    height: 100vh;
+    /* padding-top: 180px; */
+    gap: 24em;
+  }
+
+  #sec2{
+    height: fit-content;
+    bottom: 150px;
+    padding: 0 10px;
+  }
+
+  .dummy{
+    min-height: 300vh;
+    
+  }
+
+  #sec3{
+    height: fit-content;
+  }
+
+
+
+  .logo{
+    height: fit-content;
+    width: 100vw;
+    /* height: 100vh; */
+    left: 50%;
+    bottom: 100px;
+    /* top: 0; */
+    /* transform: translateX(0); */
+    font-size: 0.7rem;
+  }
 }
