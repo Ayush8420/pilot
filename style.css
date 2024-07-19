@@ -10,15 +10,29 @@
 /* 
 .body{
 } */
+/* 
+.body{
+  transform: rotate(90deg);
+  transform-origin: right top;
+    width: 100vh;
+    /* overflow-y: hidden;
+    overflow-x: scroll; */
+    /* height: 100vw;
+    /* overflow-x: hidden; */
+   /*position: absolute;
+    top: 100%;
+    left: 0; */
+
 
 .dummy{
-  min-height: 1500vh;
+  min-height: 1200vh;
+  /* min-height: 5000vh; */
 }
-
+/* 
 html.lenis, html.lenis body {
   height: auto;
-}
-
+} */
+/* 
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
@@ -29,24 +43,26 @@ html.lenis, html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
-}
-
+} */
+/* 
 .lenis.lenis-smooth iframe {
   pointer-events: none;
-}
+} */
 
-html{
+/* html{
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
 }
 
 
+
+
 .scroll{
   scroll-snap-align: center;
-}
+  } */
 
 body {
-  background-color: #24242f;
+  background-color: #0f2c49;
   overflow-x: hidden;
 }
 
@@ -95,15 +111,26 @@ section{
 
 .reach {
   color: white;
-  display: flex;
   position: fixed;
-  justify-content: center;
   top: 50%;
-  gap :19em;
   width: 100%;
-  opacity: 0;
   font-size: 2em;
-  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  opacity: 0;
+  overflow-x: hidden;
+}
+
+.reach > div{
+  width: fit-content;
+  display: flex;
+  left: 0;
+  gap :19em;
+  justify-content: center;
 }
 
 .reach span{
@@ -112,14 +139,27 @@ section{
 
 .design{
   color: white;
-  display: flex;
   position: fixed;
   top: 50%;
-  gap: 18em;
-  opacity: 0;
+  width: 100%;
   font-size: 2em;
-  padding-right: 40px;
-  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  opacity: 0;
+  overflow-x: hidden;
+}
+
+
+.design > div{
+  width: fit-content;
+  display: flex;
+  left: 0;
+  gap :19em;
+  justify-content: center;
 }
 
 .design span{
@@ -134,7 +174,7 @@ section{
   width: 100vw;
   bottom: 10%;
   text-align: center;
-  background-color: #24242f;
+  background-color: #0f2c49;
   transform: translateX(-50%);
 }
 
@@ -261,6 +301,7 @@ section{
 .shutter {
   height: 100vh;
   width: 100vw;
+  background-color: #F05223;
   object-fit: cover;
   z-index: 30;
   position: fixed;
@@ -474,6 +515,10 @@ section{
 }
 
 
+.main{
+  pointer-events: none;
+}
+
 .applicationDivs #line{
   height: 100vh;
   border: 3px solid rgba(255, 255, 255, 0.44);
@@ -489,12 +534,26 @@ section{
   text-align: center;
 }
 
+.gear{
+  pointer-events: none;
+}
+
+.divs .mat:hover{
+  transform: scale(1.2);
+}
+
+
+.divs .mat{
+  transform: scale(1);
+  transition: transform 0.4s;
+}
+
 
 .triggerSceneChange{
   height: 10vh;
   /* background-color: rgba(195, 21, 21, 0.46); */
 }
-
+/*
 
 @media screen and (max-width: 800px) {
   :root{
@@ -573,7 +632,7 @@ section{
     width: 100vw;
     justify-content: center;
     height: 100vh;
-    /* padding-top: 180px; */
+    /* padding-top: 180px; 
     gap: 24em;
   }
 
@@ -597,11 +656,11 @@ section{
   .logo{
     height: fit-content;
     width: 100vw;
-    /* height: 100vh; */
+    /* height: 100vh; 
     left: 50%;
     bottom: 100px;
-    /* top: 0; */
-    /* transform: translateX(0); */
+    /* top: 0; 
+    /* transform: translateX(0); 
     font-size: 0.7rem;
   }
-}
+}*/

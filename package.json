@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "gsap": "^3.12.5",
+    "lenis": "^1.1.6",
     "locomotive-scroll": "^4.1.4",
     "three": "^0.164.1"
   }

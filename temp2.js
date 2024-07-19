@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { gsap } from "gsap"
-import Lenis from 'lenis';
 
 
 
@@ -30,25 +29,29 @@ const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: true
 var camera;
 
 
+const tabletMedia = window.matchMedia("(max-width: 800px)")
+const mobileMedia = window.matchMedia("(max-width: 600px)")
+
+console.log(mobileMedia)
+const mediaEvent = () => {
+    if(mobileMedia.matches){
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    }else if(tabletMedia.matches){
+        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    }else{
         camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+    }
+    
+    camera.updateProjectionMatrix()
+}
+tabletMedia.addEventListener("change",mediaEvent)
+
+mediaEvent()
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(new THREE.Color("#ffffff"), 0)
 renderer.setPixelRatio(window.devicePixelRatio);
-THREE.ColorManagement.enabled = false;
-
-const lightLeft = new THREE.PointLight(0xffffff,30)
-
-lightLeft.position.set(-1,-1,6)
-
-scene.add(new THREE.PointLightHelper(lightLeft))
-
-scene.add(lightLeft)
-
-
-// scene.add(new THREE.CameraHelper(camera))
-
-// scene.add(new THREE.AxesHelper(1000))
+THREE.ColorManagement.enabled = false
 
 
 const sizes = {
@@ -86,7 +89,7 @@ const cameraPositions = {
     logo: {
         x: 0,
         y: 2.3,
-        z:29
+        z: mobileMedia.matches?37:29
     },
     gearOne: {
         x: -2.2,
@@ -192,7 +195,14 @@ console.log(instruAbout);
 
 //Earth to the  right
 
-
+if(mobileMedia.matches){
+    tl.to(camera.position, {
+        x: 0,
+        y: 2,
+        z: 7,
+        duration: 900,
+    }, 'start')
+}else{
     tl.to(camera.position, {
         x: -2.2,
         y: 0.2,
@@ -200,7 +210,7 @@ console.log(instruAbout);
         duration: 900,
     }, 'start')
 
-
+}
 
 
 tl.to(heading,
@@ -243,7 +253,7 @@ gltfLoader.load(
                 child.material.needsUpdate = true
             }
         })
-        gltf.scene.scale.set(0.151, 0.151, 0.151)
+        gltf.scene.scale.set(0.15, 0.15, 0.15)
         scene.add(gltf.scene);
         mesh = gltf.scene
         // mesh.position.x += 0.42
@@ -252,13 +262,16 @@ gltfLoader.load(
         // mesh.position.z -= 5.3
         mesh.rotation.y = 1 * Math.PI
 
-        tl.to(mesh.rotation, { duration: 1000, y: 2 * Math.PI, ease: "none", }, 'start1');
+        tl.to(mesh.rotation, { duration: 1000, y: 2 * Math.PI, ease: "none", delay: 100 }, 'start1');
 
-            tl.to(mesh.position,{y: -0.035, x: .315, duration: 900},"start")
-        
+        if(mobileMedia.matches){
+            tl.to(mesh.position,{y: -0.33, duration: 900},"start")
+        }else{
+            tl.to(mesh.position,{y: 0.05, x: .3, duration: 900},"start")
+        }
 
         tl.to(mesh.position,{ x: 0, duration: 560},"start1")
-        tl.to(mesh.children[0].material, { duration: 1500, opacity: 0, ease: "none", }, 'start2+=500');
+        tl.to(mesh.children[0].material, { duration: 150, opacity: 0, ease: "none", delay: -1 }, 'start2');
     },
 
     (xhr) => {
@@ -303,9 +316,8 @@ gltfLoader.load(
             z: 7,
             y: 0,
             x: 0,
-            duration: 1100,
+            duration: 1800,
         }, 'start1')
-
 
         tl.to(outerEarth.children[0].material, { duration: 1, opacity: 0, ease: "none" }, 'start1');
         tl.to(outerEarth.rotation, { duration: 1000, y: 2 * Math.PI, ease: "none", delay: 100 }, 'start1');
@@ -343,10 +355,7 @@ gltfLoader.load(
                         child.scale.z = 2
                         child.translateY += 20
                         console.log("Scale", child.scale)
-                    } 
-                    //  if(child.name == "pot"){
-                    //     child.scale(2,2)
-                    // }
+                    }
                 }
                 else {
 
@@ -362,8 +371,11 @@ gltfLoader.load(
         
         model3 = gltf.scene
 
+        if(mobileMedia.matches){
+            tl.to(model3.position,{y: -4.2, duration: 900},"start")
+        }else{
             tl.to(model3.position,{y: -3.45, x: .5, duration: 900},"start")
-        
+        }
         
         console.log(gltf);
         mixer = new THREE.AnimationMixer(gltf.scene)
@@ -410,38 +422,36 @@ gltfLoader.load(
         gearAction.paused = true
 
 
+        if(mobileMedia.matches){
+            tl.to(model3.position,{y: -4, x: .1, duration: 800},"start1")
+        }else{
             tl.to(model3.position,{y: -3.5, x: .1, duration: 800},"start1")
-        
+        }
 
 
-            const potAction = mixer.clipAction(clips[6]);
-            potAction.setLoop(THREE.LoopOnce);
-            potAction.clampWhenFinished = true;
-            potAction.play();
-            potAction.paused = true
-    
-
-        tl.fromTo(innerPotAction, {time: 6.25 / 2},{ time: 6.25, ease: "none", duration: 1000 }, 'start1')
-            .to(insidePotBigAction, { time: 6.25, ease: "none", duration: 200, delay: 100 }, "start2+=50")
+        tl.fromTo(innerPotAction, {time: 6.25 / 2},{ time: 6.25, ease: "none", duration: 1000, delay:100 }, 'start1')
+            .to(insidePotBigAction, { time: 6.25, ease: "none", duration: 200, delay: 100 })
             .to(insidePotSmallAction, { time: 6.25, ease: "none", duration: 200, delay: 100 })
-            .to(reach, {opacity : 1, duration: 300, delay: 100})
-            .to(reach, { width: reach.clientWidth, duration: 1, delay: 100 }, "<")
-            .to(reach, { width: 0, duration: 800, delay: 900 })
-            .to(gearAction, { time: 6.25, ease: "none", duration: 1500, delay: 2500 }, 'start2')
+            .to(reach, { opacity: 1, duration: 60, delay: 100 })
+            .to(reach, { opacity: 0, duration: 60, delay: 1000 })
+            .to(gearAction, { time: 6.25, ease: "none", duration: 1500, delay: 1600 }, 'start2')
             .to(camera.position, { z: 12, y: 0, ease: "none", duration: 600 })
-            .to(design, {opacity : 1, duration: 300, delay: 100})
-            .to(design, { width: design.clientWidth, duration: 1, delay: 100 }, "<")
-            .to(design, { width: 0, duration: 800, delay: 900 }, "start3")
+            .to(design, { opacity: 1, duration: 50, delay: 100 })
+            .to(design, { opacity: 0, duration: 50, delay: 1500 }, "start3")
 
 
 
 
+        const potAction = mixer.clipAction(clips[6]);
+        potAction.setLoop(THREE.LoopOnce);
+        potAction.clampWhenFinished = true;
+        potAction.play();
+        potAction.paused = true
 
 
-        
-        // .to(potAction, {time: 0, duration: 0},'<')
-        .to(potAction, {time : 0, duration: 1} ,  "-=800")
-        .fromTo(potAction, {time : 6.25 / 2}, { time: 6.25, ease: "none", duration: 900}, "-=800")
+
+
+        tl.to(potAction, { time: 6.25, ease: "none", duration: 600, delay: 1600 }, 'start3')
             .to(camera.position, { z: 22, ease: "none", duration: 600, delay: 100 });
 
         
@@ -520,8 +530,12 @@ gltfLoader.load(
                 child.material.needsUpdate = true
             }
         })
+
+        if(mobileMedia.matches){
+            gltf.scene.position.y = -3.8
+        }else{
             gltf.scene.position.y = -3.5;
-        
+        }
 
         gltf.scene.position.z = -2.05
         gltf.scene.scale.set(35, 35, 35)
@@ -533,9 +547,9 @@ gltfLoader.load(
 
         //Temp code (remove if afterwards)
 
-        // tl.to(gltf.scene.children[0].material, { opacity: 1, duration: 600, delay: 600 }, 'logoHide+=10')
+        tl.to(gltf.scene.children[0].material, { opacity: 1, duration: 600, delay: 600 }, 'logoHide+=10')
 
-        // if(mobileMedia.matches) return;
+        if(mobileMedia.matches) return;
         //Remove till here
 
 
@@ -556,7 +570,7 @@ gltfLoader.load(
                 duration: 150
             }, "shutterClose1")
             .to('.shutter', {
-                x: 2000,
+                y: -1000,
                 duration: 300,
                 delay: 100
             })
@@ -568,7 +582,6 @@ gltfLoader.load(
 
 tl.to('.gear1', {
     opacity: 1,
-    pointerEvents: "all",
     duration: 0.1
 },"shutterClose1+=150")
 
@@ -577,7 +590,7 @@ tl.to(settings, {
     duration: 0.1
 },"shutterClose1+=150")
 .to('.shutter', {
-    x: 0,
+    y: 0,
     duration: 300,
     delay: 800
 })
@@ -595,7 +608,6 @@ tl.to(settings, {
 
 tl.to('.gear1', {
     opacity: 0,
-    pointerEvents: "none",
     duration: 0.1
 },"shutterOpen1")
 .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear1Done")
@@ -615,14 +627,13 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 150
     }, "shutterClose2")
     .to('.shutter', {
-        x: 2000,
+        y: -1000,
         duration: 300,
         delay: 100
     })
 
     tl.to('.gear2', {
         opacity: 1,
-        pointerEvents: "all",
         duration: 0.1
     },"shutterClose2+=150")
     
@@ -631,7 +642,7 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 0.1
     },"shutterClose2+=150")
     .to('.shutter', {
-        x: 0,
+        y: 0,
         duration: 300,
         delay: 800
     })
@@ -649,7 +660,6 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     
     tl.to('.gear2', {
         opacity: 0,
-        pointerEvents: "none",
         duration: 0.1
     },"shutterOpen2")
     .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear2Done")
@@ -672,14 +682,13 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 150
     }, "shutterClose3")
     .to('.shutter', {
-        x: 2000,
+        y: -1000,
         duration: 300,
         delay: 100
     })
 
     tl.to('.gear3', {
         opacity: 1,
-        pointerEvents: "all",
         duration: 0.1
     },"shutterClose3+=150")
     
@@ -688,7 +697,7 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 0.1
     },"shutterClose3+=150")
     .to('.shutter', {
-        x: 0,
+        y: 0,
         duration: 300,
         delay: 800
     })
@@ -706,7 +715,6 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     
     tl.to('.gear3', {
         opacity: 0,
-        pointerEvents: "none",
         duration: 0.1
     },"shutterOpen3")
     .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear3Done")
@@ -730,14 +738,13 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 150
     }, "shutterClose4")
     .to('.shutter', {
-        x: 2000,
+        y: -1000,
         duration: 300,
         delay: 100
     })
 
     tl.to('.gear4', {
         opacity: 1,
-        pointerEvents: "all",
         duration: 0.1
     },"shutterClose4+=150")
     
@@ -746,7 +753,7 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 0.1
     },"shutterClose4+=150")
     .to('.shutter', {
-        x: 0,
+        y: 0,
         duration: 300,
         delay: 800
     })
@@ -764,7 +771,6 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     
     tl.to('.gear4', {
         opacity: 0,
-        pointerEvents: "none",
         duration: 0.1
     },"shutterOpen4")
     .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear4Done")
@@ -788,14 +794,13 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 150
     }, "shutterClose5")
     .to('.shutter', {
-        x: 2000,
+        y: -1000,
         duration: 300,
         delay: 100
     })
 
     tl.to('.gear5', {
         opacity: 1,
-        pointerEvents: "all",
         duration: 0.1
     },"shutterClose5+=150")
     
@@ -804,7 +809,7 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 0.1
     },"shutterClose5+=150")
     .to('.shutter', {
-        x: 0,
+        y: 0,
         duration: 300,
         delay: 800
     })
@@ -822,7 +827,6 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     
     tl.to('.gear5', {
         opacity: 0,
-        pointerEvents: "none",
         duration: 0.1
     },"shutterOpen5")
     .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear5Done")
@@ -845,14 +849,13 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 150
     }, "shutterClose6")
     .to('.shutter', {
-        x: 2000,
+        y: -1000,
         duration: 300,
         delay: 100
     })
 
     tl.to('.gear6', {
         opacity: 1,
-        pointerEvents: "all",
         duration: 0.1
     },"shutterClose6+=150")
     
@@ -861,7 +864,7 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 0.1
     },"shutterClose6+=150")
     .to('.shutter', {
-        x: 0,
+        y: 0,
         duration: 300,
         delay: 800
     })
@@ -879,7 +882,6 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     
     tl.to('.gear6', {
         opacity: 0,
-        pointerEvents: "none",
         duration: 0.1
     },"shutterOpen6")
     .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear6Done")
@@ -902,14 +904,13 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 150
     }, "shutterClose7")
     .to('.shutter', {
-        x: 2000,
+        y: -1000,
         duration: 300,
         delay: 100
     })
 
     tl.to('.gear7', {
         opacity: 1,
-        pointerEvents: "all",
         duration: 0.1
     },"shutterClose7+=150")
     
@@ -918,7 +919,7 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
         duration: 0.1
     },"shutterClose7+=150")
     .to('.shutter', {
-        x: 0,
+        y: 0,
         duration: 300,
         delay: 800
     })
@@ -936,7 +937,6 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     
     tl.to('.gear7', {
         opacity: 0,
-        pointerEvents: "none", 
         duration: 0.1
     },"shutterOpen7")
     .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear7Done")
@@ -973,13 +973,13 @@ pressureCamera.position.z = 4
 pressureCamera.position.y = 0.7
 pressureCamera.rotation.x -= 0.05
 
-let planeTexture = textureLoader.load('/assets/textures/wood_planks_diff_1k.jpg')
+let planeTexture = textureLoader.load('public/assets/textures/wood_planks_diff_1k.jpg')
 planeTexture.repeat.set(4, 4);
 planeTexture.wrapT = THREE.RepeatWrapping
 planeTexture.wrapS = THREE.RepeatWrapping
 const planeMaterial = new THREE.MeshBasicMaterial({ transparent: true, map: planeTexture })
 
-let floorTexture = textureLoader.load('/assets/Store_uv.png')
+let floorTexture = textureLoader.load('public/assets/Store_uv.png')
 floorTexture.flipY = false
 floorTexture.encoding = THREE.sRGBEncoding
 const platformMaterial = new THREE.MeshBasicMaterial({ transparent: true, map: floorTexture })
