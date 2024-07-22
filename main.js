@@ -29,8 +29,24 @@ const canvas = document.querySelector('.webgl')
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: true })
 var camera;
 
+const tabletMedia = window.matchMedia("(max-width: 800px)")
+const mobileMedia = window.matchMedia("(max-width: 600px)")
 
+console.log(mobileMedia)
+const mediaEvent = () => {
+    if(mobileMedia.matches){
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    }else if(tabletMedia.matches){
+        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    }else{
         camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+    }
+    
+    camera.updateProjectionMatrix()
+}
+tabletMedia.addEventListener("change",mediaEvent)
+
+mediaEvent()
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(new THREE.Color("#ffffff"), 0)
@@ -41,7 +57,7 @@ const lightLeft = new THREE.PointLight(0xffffff,30)
 
 lightLeft.position.set(-1,-1,6)
 
-scene.add(new THREE.PointLightHelper(lightLeft))
+// scene.add(new THREE.PointLightHelper(lightLeft))
 
 scene.add(lightLeft)
 
@@ -86,7 +102,7 @@ const cameraPositions = {
     logo: {
         x: 0,
         y: 2.3,
-        z:29
+        z:mobileMedia.matches?37:29
     },
     gearOne: {
         x: -2.2,
@@ -129,8 +145,8 @@ THREE.ColorManagement.legacyMode = false;
 const textureLoader = new THREE.TextureLoader()
 
 let meshTexture = textureLoader.load('./assets/bakingText.jpg')
-let earthTexture = textureLoader.load('./assets/diff/earthTexture.jpeg')
-let innerEarthTexture = textureLoader.load('./assets/diff/Frame 8.jpg')
+let earthTexture = textureLoader.load('./assets/diff/Frame 57.jpg')
+let innerEarthTexture = textureLoader.load('./assets/diff/Frame 55.jpg')
 earthTexture.flipY = false
 innerEarthTexture.flipY = false
 meshTexture.flipY = false
@@ -140,7 +156,7 @@ meshTexture.encoding = THREE.sRGBEncoding
 
 const meshMaterial = new THREE.MeshBasicMaterial({
     map: meshTexture,
-    flatShading: false
+    //flatshading: false
 })
 
 const orangeMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color('#F05223') })
@@ -149,13 +165,13 @@ const greenMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color('#31B
 const outerEarthMaterial = new THREE.MeshBasicMaterial({
     map: earthTexture,
     transparent: true,
-    flatShading: false
+    //flatshading: false
 })
 
 const innerEarthMaterial = new THREE.MeshBasicMaterial({
     map: innerEarthTexture,
     transparent: true,
-    flatShading: false,
+    //flatshading: false,
 })
 
 const gltfLoader = new GLTFLoader();
@@ -187,18 +203,27 @@ const reach = document.querySelector('.reach')
 const design = document.querySelector('.design')
 const logo = document.querySelector('.logo')
 const sec2 = document.querySelector(".sec2")
-console.log(instruAbout);
+//console.log(instruAbout);
 
 
 //Earth to the  right
 
-
+if(mobileMedia.matches){
+    tl.to(camera.position, {
+        x: 0,
+        y: 2,
+        z: 7,
+        duration: 900,
+    }, 'start')
+}else{
     tl.to(camera.position, {
         x: -2.2,
         y: 0.2,
         z: 7,
         duration: 900,
     }, 'start')
+
+}
 
 
 
@@ -254,19 +279,23 @@ gltfLoader.load(
 
         tl.to(mesh.rotation, { duration: 1000, y: 2 * Math.PI, ease: "none", }, 'start1');
 
+        if(mobileMedia.matches){
+            tl.to(mesh.position,{y: -0.33, duration: 900},"start")
+        }else{
             tl.to(mesh.position,{y: -0.035, x: .315, duration: 900},"start")
-        
+        }
+    
 
         tl.to(mesh.position,{ x: 0, duration: 560},"start1")
         tl.to(mesh.children[0].material, { duration: 1500, opacity: 0, ease: "none", }, 'start2+=500');
     },
 
     (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
 
     (error) => {
-        console.error('An error happened', error);
+        //console.error('An error happened', error);
     }
 );
 
@@ -286,7 +315,7 @@ gltfLoader.load(
         })
 
         outerEarth = gltf.scene
-        console.log(mesh)
+        //console.log(mesh)
         gltf.scene.scale.set(0.118, 0.118, 0.118)
         scene.add(outerEarth);
         // outerEarth.position.x -= 0.05
@@ -312,15 +341,15 @@ gltfLoader.load(
 
         // tl.from(reach, { opacity: 0, duration: 1 })
         // tl.to(reach, { opacity: 0, duration: 1 })
-        //         console.log(mesh);
+        //         //console.log(mesh);
     },
 
     (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
 
     (error) => {
-        console.error('An error happened', error);
+        //console.error('An error happened', error);
     }
 );
 
@@ -328,25 +357,14 @@ gltfLoader.load(
 //outer animation
 let model3;
 gltfLoader.load(
-    'assets/diff/model3.glb',
+    'assets/diff/model7.glb',
     // onLoad callback
     (gltf) => {
         gltf.scene.traverse((child) => {
             if (child.isMesh) {
                 if (child.name == 'innerPot' || child.name == 'pot' || child.name == 'innerPotSmall' || child.name == 'innerPotBig') {
-                    console.log("tests:", child.name);
+                    //console.log("tests:", child.name);
                     child.material = greenMaterial
-
-                    if (child.name == 'innerPotSmall' || child.name == 'innerPotBig') {
-                        child.scale.x = 2
-                        child.scale.y = 2
-                        child.scale.z = 2
-                        child.translateY += 20
-                        console.log("Scale", child.scale)
-                    } 
-                    //  if(child.name == "pot"){
-                    //     child.scale(2,2)
-                    // }
                 }
                 else {
 
@@ -362,14 +380,17 @@ gltfLoader.load(
         
         model3 = gltf.scene
 
+        if(mobileMedia.matches){
+            tl.to(model3.position,{y: -4.2, duration: 900},"start")
+        }else{
             tl.to(model3.position,{y: -3.45, x: .5, duration: 900},"start")
+        }
         
-        
-        console.log(gltf);
+        //console.log(gltf);
         mixer = new THREE.AnimationMixer(gltf.scene)
         mixer.clampWhenFinished = true
         clips = gltf.animations;
-        console.log(clips);
+        //console.log(clips);
 
 
 
@@ -381,6 +402,7 @@ gltfLoader.load(
         innerPotAction.play();
         innerPotAction.paused = true
         // innerPotAction.setDuration(7);
+
 
 
 
@@ -410,8 +432,12 @@ gltfLoader.load(
         gearAction.paused = true
 
 
+        if(mobileMedia.matches){
+            tl.to(model3.position,{y: -4, x: .1, duration: 800},"start1")
+        }else{
             tl.to(model3.position,{y: -3.5, x: .1, duration: 800},"start1")
-        
+        }
+
 
 
             const potAction = mixer.clipAction(clips[6]);
@@ -439,9 +465,9 @@ gltfLoader.load(
 
 
         
-        // .to(potAction, {time: 0, duration: 0},'<')
-        .to(potAction, {time : 0, duration: 1} ,  "-=800")
-        .fromTo(potAction, {time : 6.25 / 2}, { time: 6.25, ease: "none", duration: 900}, "-=800")
+        // .to(potAction, {time: 0, duration: 800},'<')
+        .to(potAction, {time : 6.25/2, duration: 1} ,  "-=800")
+        .to(potAction, { time: 6.25, ease: "none", duration: 900}, "-=800")
             .to(camera.position, { z: 22, ease: "none", duration: 600, delay: 100 });
 
         
@@ -494,15 +520,15 @@ gltfLoader.load(
 
     },
     (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
     (error) => {
-        console.error('An error happened', error);
+        //console.error('An error happened', error);
     }
 );
 
 
-let textTexture = textureLoader.load('./assets/text.png')
+let textTexture = textureLoader.load('./assets/text2.png')
 textTexture.flipY = false
 textTexture.encoding = THREE.sRGBEncoding
 const textMaterial = new THREE.MeshBasicMaterial({ transparent: true, map: textTexture })
@@ -520,8 +546,12 @@ gltfLoader.load(
                 child.material.needsUpdate = true
             }
         })
+
+        if(mobileMedia.matches){
+            gltf.scene.position.y = -3.8
+        }else{
             gltf.scene.position.y = -3.5;
-        
+        }
 
         gltf.scene.position.z = -2.05
         gltf.scene.scale.set(35, 35, 35)
@@ -950,16 +980,16 @@ tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
     },
 
     (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
 
     (error) => {
-        console.error('An error happened', error);
+        //console.error('An error happened', error);
     }
 );
 
 
-console.log(group);
+//console.log(group);
 scene.add(group);
 
 
@@ -998,7 +1028,7 @@ gltfLoader.load(
 
     (gltf) => {
         gltf.scene.traverse((child) => {
-            console.log(child.name);
+            //console.log(child.name);
             if (child.name == 'bg') {
                 child.scale.set(0.9, 0.9, 0.9)
                 child.position.y -= 0.2
@@ -1019,22 +1049,22 @@ gltfLoader.load(
             if (child.isMesh) {
                 child.material = platformMaterial
                 child.material.needsUpdate = true
-                console.log('material updated');
+                //console.log('material updated');
             }
         })
 
-        console.log(gltf.scene);
+        //console.log(gltf.scene);
     
         pressureScene.add(gltf.scene);
 
     },
 
     (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
 
     (error) => {
-        console.error('An error happened', error);
+        //console.error('An error happened', error);
     }
 );
 

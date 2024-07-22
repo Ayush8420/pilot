@@ -283,7 +283,7 @@ section{
 .gear0{
   height: 70vh;
 }
-
+/* 
 .pressureDivs {
   display: flex;
   flex-direction: row;
@@ -297,7 +297,7 @@ section{
 
 }
 
-
+*/
 .shutter {
   height: 100vh;
   width: 100vw;
@@ -310,7 +310,7 @@ section{
   pointer-events: none;
   left: 0;
 }
-
+/*
 .pressureDivs #line{
   height: 100vh;
   border: 3px solid rgba(255, 255, 255, 0.44);
@@ -342,7 +342,7 @@ section{
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  /* gap: 8em; */
+  
 
 }
 
@@ -377,7 +377,7 @@ section{
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  /* gap: 8em; */
+  
 
 }
 
@@ -410,7 +410,7 @@ section{
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  /* gap: 8em; */
+  
 
 }
 
@@ -442,7 +442,7 @@ section{
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  /* gap: 8em; */
+  
 
 }
 
@@ -476,7 +476,7 @@ section{
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  /* gap: 8em; */
+  
 
 }
 
@@ -510,14 +510,10 @@ section{
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  /* gap: 8em; */
+  
 
 }
 
-
-.main{
-  pointer-events: none;
-}
 
 .applicationDivs #line{
   height: 100vh;
@@ -533,27 +529,95 @@ section{
   align-items: center;
   text-align: center;
 }
+  */
+.main{
+  pointer-events: none;
+}
+
 
 .gear{
   pointer-events: none;
 }
 
-.divs .mat:hover{
-  transform: scale(1.2);
+.divs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 0 7%; */
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
+
 
 
 .divs .mat{
+  color: white;
+  width: 100%;
+  font-size: 1.3em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  /* transition: filter 0.4s; */
+}
+
+
+.divs .mat:not(:last-child){
+  border-right: 3px solid rgba(255, 255, 255, 0.44);;
+}
+
+
+.divs .mat a{
+  display: block;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  overflow: hidden;
+  padding-bottom: 70px;
+}
+
+.divs .mat a img{
+  width: 100%;
+  object-fit: contain;
+  object-position: bottom;
   transform: scale(1);
   transition: transform 0.4s;
+  /* height: 100%; */
 }
+
+/* .divs:hover .mat{
+  filter: blur(3px);
+}
+
+.divs .mat:hover{
+  filter: blur(0);
+} */
+
+.divs .mat:hover a img{
+  transform: scale(1.1);
+}
+
+
+.divs .mat span{
+  background-color: #000a;
+  display: block;
+  padding: .5em;
+  width: 100%;
+}
+
 
 
 .triggerSceneChange{
   height: 10vh;
-  /* background-color: rgba(195, 21, 21, 0.46); */
-}
-/*
+} 
+
 
 @media screen and (max-width: 800px) {
   :root{
@@ -616,24 +680,33 @@ section{
     top: 0;
     left: 0;
     transform: translate(0,0);
-    flex-direction: column;
-    align-items: center;
     width: 100vw;
     height: 100vh;
     padding-top: 100px;
   }
 
-  .design{
+  .reach > div{
+    
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .design {
     top: 0;
     left: 0;
     transform: translate(0,0);
-    flex-direction: column;
-    align-items: center;
     width: 100vw;
+    display: flex !important;
     justify-content: center;
     height: 100vh;
-    /* padding-top: 180px; 
+    /* padding-top: 180px;  */
     gap: 24em;
+  }
+
+  .design > div{
+    flex-direction: column;
+    align-items: center;
+
   }
 
   #sec2{
@@ -656,11 +729,11 @@ section{
   .logo{
     height: fit-content;
     width: 100vw;
-    /* height: 100vh; 
+    /* height: 100vh; */
     left: 50%;
     bottom: 100px;
-    /* top: 0; 
-    /* transform: translateX(0); 
+    /* top: 0; */
+    /* transform: translateX(0); */
     font-size: 0.7rem;
   }
-}*/
+}
