@@ -64,10 +64,14 @@ html.lenis, html.lenis body {
   scroll-snap-align: center;
   } */
 
+html, body{
+  height: 100svh;
+}
+
+
 body {
   background-color: #0f2c49;
   width: 100vw;
-  height: 100svh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -552,6 +556,9 @@ section{
   /* padding: 0 7%; */
   width: 100vw;
   height: 100vh;
+  background-image: url("public/assets/animation_bg.jpg");
+  background-size: cover;
+  background-position: center bottom;
   position: fixed;
   top: 0;
   left: 0;

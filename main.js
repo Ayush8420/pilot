@@ -452,12 +452,12 @@ gltfLoader.load(
             .to(insidePotSmallAction, { time: 6.25, ease: "none", duration: 200, delay: 100 })
             .to(reach, {opacity : 1, duration: 300, delay: 100})
             .to(reach, { width: reach.clientWidth, duration: 1, opacity: 1, delay: 100 }, "<")
-            .to(reach, { [mobileMedia? "opacity" : "width"]: 0, duration: 800, delay: 900 })
+            .to(reach, { [mobileMedia.matches? "opacity" : "width"]: 0, duration: 800, delay: 900 })
             .to(gearAction, { time: 6.25, ease: "none", duration: 1500, delay: 2500 }, 'start2')
             .to(camera.position, { z: 12, y: 0, ease: "none", duration: 600 })
             .to(design, {opacity : 1, duration: 300, delay: 100})
             .to(design, { width: design.clientWidth, duration: 1, delay: 100 }, "<")
-            .to(design, { [mobileMedia? "opacity" : "width"]: 0, duration: 800, delay: 900 }, "start3")
+            .to(design, { [mobileMedia.matches? "opacity" : "width"]: 0, duration: 800, delay: 900 }, "start3")
 
 
 
