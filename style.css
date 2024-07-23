@@ -30,10 +30,9 @@
 }
 /* 
 html.lenis, html.lenis body {
-  height: 100svh;
-  
-}
-
+  height: auto;
+} */
+/* 
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
@@ -63,13 +62,8 @@ html.lenis, html.lenis body {
   } */
 
 body {
-  background-color: #24242f;
+  background-color: #0f2c49;
   overflow-x: hidden;
-}
-
-.body{
-   width: 100vw;
-   overflow-x: hidden;
 }
 
 section{
