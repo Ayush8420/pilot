@@ -9,7 +9,7 @@
 }
 
 .body{
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
 
 }
@@ -65,7 +65,9 @@ html.lenis, html.lenis body {
   } */
 
 html, body{
+  height: 100vh;
   height: 100svh;
+  height: -webkit-fill-available;
 }
 
 
