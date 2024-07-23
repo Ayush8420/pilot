@@ -145,8 +145,8 @@ THREE.ColorManagement.legacyMode = false;
 const textureLoader = new THREE.TextureLoader()
 
 let meshTexture = textureLoader.load('./assets/bakingText.jpg')
-let earthTexture = textureLoader.load('./assets/diff/Frame 57.jpg')
-let innerEarthTexture = textureLoader.load('./assets/diff/Frame 55.jpg')
+let earthTexture = textureLoader.load('./assets/diff/Frame 61.jpg')
+let innerEarthTexture = textureLoader.load('./assets/diff/Frame 60.jpg')
 earthTexture.flipY = false
 innerEarthTexture.flipY = false
 meshTexture.flipY = false
@@ -451,13 +451,13 @@ gltfLoader.load(
             .to(insidePotBigAction, { time: 6.25, ease: "none", duration: 200, delay: 100 }, "start2+=50")
             .to(insidePotSmallAction, { time: 6.25, ease: "none", duration: 200, delay: 100 })
             .to(reach, {opacity : 1, duration: 300, delay: 100})
-            .to(reach, { width: reach.clientWidth, duration: 1, delay: 100 }, "<")
-            .to(reach, { width: 0, duration: 800, delay: 900 })
+            .to(reach, { width: reach.clientWidth, duration: 1, opacity: 1, delay: 100 }, "<")
+            .to(reach, { [mobileMedia? "opacity" : "width"]: 0, duration: 800, delay: 900 })
             .to(gearAction, { time: 6.25, ease: "none", duration: 1500, delay: 2500 }, 'start2')
             .to(camera.position, { z: 12, y: 0, ease: "none", duration: 600 })
             .to(design, {opacity : 1, duration: 300, delay: 100})
             .to(design, { width: design.clientWidth, duration: 1, delay: 100 }, "<")
-            .to(design, { width: 0, duration: 800, delay: 900 }, "start3")
+            .to(design, { [mobileMedia? "opacity" : "width"]: 0, duration: 800, delay: 900 }, "start3")
 
 
 
@@ -505,13 +505,12 @@ gltfLoader.load(
         tl.to(sec2, { opacity: 1, duration: 5 }, "cone+=10")
 
 
-        .to(camera.position, { x: cameraPositions.final.x, y: cameraPositions.final.y, z: cameraPositions.final.z, duration: 800 }, 'cone+=2000');
+        .to(camera.position, {...cameraPositions.final, duration: 800 }, 'cone+=2000');
         tl.from(logo, { y: 200, duration: 800 }, 'cone+=2000')
-        tl.to(sec2, { opacity: 0, duration: 1, delay: 30 }, "cone+=2000")
-            .to(logo, { backgroundColor: "#00000000" })
+        tl.to(sec2, { opacity: 0, duration: 200, delay: 30 }, "cone+=1800")
 
         tl.to(logo, { y: 200, delay: 15, duration: 500, delay: 500 }, 'logoHide')
-        tl.to(camera.position, { x: cameraPositions.logo.x, y: cameraPositions.logo.y, z: cameraPositions.logo.z, ease: "none", duration: 500, }, 'logoHide+=500')
+        tl.to(camera.position, {...cameraPositions.logo, ease: "none", duration: 500, }, 'logoHide+=500')
 
 
 
