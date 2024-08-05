@@ -5,71 +5,61 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  /* color: white; */
 }
 
 .body{
   width: 100%;
   overflow-x: hidden;
-
 }
-/* 
-.body{
-  transform: rotate(90deg);
-  transform-origin: right top;
-    width: 100vh;
-    /* overflow-y: hidden;
-    overflow-x: scroll; */
-    /* height: 100vw;
-    /* overflow-x: hidden; */
-   /*position: absolute;
-    top: 100%;
-    left: 0; */
 
+.loader{
+  z-index: 1000000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0f2c49;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+
+.loader .spinner{
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-top-color:transparent;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0%{
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(360deg);
+  }
+  
+}
+
+.loader.done{
+  opacity: 0;
+}
 
 .dummy{
   min-height: 1200vh;
-  /* min-height: 5000vh; */
-}
-/* 
-html.lenis, html.lenis body {
-  height: auto;
-} */
-/* 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-} */
-/* 
-.lenis.lenis-smooth iframe {
   pointer-events: none;
-} */
-
-/* html{
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
-
-
-
-
-.scroll{
-  scroll-snap-align: center;
-  } */
 
 html, body{
   height: 100vh;
   height: 100svh;
   height: -webkit-fill-available;
 }
-
 
 body {
   background-color: #0f2c49;
@@ -91,7 +81,7 @@ section{
   text-align: center;
   max-width: 70vw;
   z-index: 5;
-  font-size: 1.4em;
+  font-size: 1.1em;
   margin-top: 3em;
   max-width: 700px;
 }
@@ -106,7 +96,6 @@ section{
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 5;
-  /* backdrop-filter: blur(1em); */
   font-size: 1.2em;
   opacity: 0;
   color: white;
@@ -201,16 +190,6 @@ section{
   font-family: "Orbitron", sans-serif;
 }
 
-/* #sec1 {
-  background-color: rgba(119, 144, 166, 0.3);
-}
-#sec2 {
-  background-color: rgba(119, 166, 147, 0.3);
-}
-#sec3 {
-  background-color: rgba(166, 144, 119, 0.3);
-  height: 30vh;
-} */
 
 #sec2{
   text-transform: uppercase;
@@ -223,7 +202,6 @@ section{
   height: fit-content;
   display: inline;
   text-align: center;
-
 }
 
 .sec2{
@@ -234,7 +212,6 @@ section{
   font-size: 1.7em;
 }
 
-
 .webgl {
   height: 100vh;
   position: fixed;
@@ -243,72 +220,10 @@ section{
   z-index: -1;
 }
 
-
-
-/* #transitionButton {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  padding: 10px 20px;
-  background-color: #fff;
-  border: 1px solid #000;
-  cursor: pointer;
-  z-index: 10;
-} */
-
-/* .gear0{
-} */
-.gear1{
-  opacity: 0;
-}
-.gear2{
-  opacity: 0;
-}
-.gear3{
-  opacity: 0;
-}
-.gear4{
-  opacity: 0;
-}
-.gear5{
-  opacity: 0;
-}
-.gear6{
-  opacity: 0;
-}
-.gear7{
-  opacity: 0;
-}
-
-/* .pressureMat {
-  background-color: rgba(0, 0, 0,0.1);
-  height: 16%;
-  border: 1px solid red;
-  width: 100%;
-} */
-
-/* .pressureImages {
-  
-} */
-
 .gear0{
   height: 70vh;
 }
-/* 
-.pressureDivs {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  gap: 5em;
 
-}
-
-*/
 .shutter {
   height: 100vh;
   width: 100vw;
@@ -321,226 +236,7 @@ section{
   pointer-events: none;
   left: 0;
 }
-/*
-.pressureDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
 
-.pressureDivs {
-  z-index: 20;
-}
-
-
-
-.pressureMat {
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.temeratureDivs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  
-
-}
-
-
-.temeratureDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
-
-.temperatureMat{
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-}
-
-
-
-
-
-.flowDivs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  
-
-}
-
-
-.flowDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
-
-.flowMat{
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-}
-
-
-
-.samplePreparationDivs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  
-
-}
-
-
-.samplePreparationDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
-
-.sampleMat{
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-
-
-.superCriticleDivs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  
-
-}
-
-
-.superCriticleDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
-
-.superCriticleMat{
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-}
-
-
-
-
-.heatExchangeDivs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  
-
-}
-
-
-.heatExchangeDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
-
-.heatExchangeMat{
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-}
-
-
-
-
-.applicationDivs{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  
-
-}
-
-
-.applicationDivs #line{
-  height: 100vh;
-  border: 3px solid rgba(255, 255, 255, 0.44);
-}
-
-.applicationMat{
-  color: white;
-  font-size: 1.3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-  */
 .main{
   pointer-events: none;
 }
@@ -548,6 +244,7 @@ section{
 
 .gear{
   pointer-events: none;
+  opacity: 0;
 }
 
 .divs{
@@ -555,18 +252,15 @@ section{
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0 7%; */
   width: 100vw;
   height: 100vh;
-  background-image: url("public/assets/animation_bg.jpg");
+  background-image: url("/assets/animation_bg.jpg");
   background-size: cover;
   background-position: center bottom;
   position: fixed;
   top: 0;
   left: 0;
 }
-
-
 
 .divs .mat{
   color: white;
@@ -578,14 +272,11 @@ section{
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  /* transition: filter 0.4s; */
 }
-
 
 .divs .mat:not(:last-child){
   border-right: 3px solid rgba(255, 255, 255, 0.44);;
 }
-
 
 .divs .mat a{
   display: block;
@@ -594,25 +285,16 @@ section{
   display: flex;
   align-items: end;
   overflow: hidden;
-  padding-bottom: 70px;
 }
 
 .divs .mat a img{
   width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: bottom;
   transform: scale(1);
   transition: transform 0.4s;
-  /* height: 100%; */
 }
-
-/* .divs:hover .mat{
-  filter: blur(3px);
-}
-
-.divs .mat:hover{
-  filter: blur(0);
-} */
 
 .divs .mat:hover a img{
   transform: scale(1.1);
@@ -626,12 +308,33 @@ section{
   width: 100%;
 }
 
-
-
 .triggerSceneChange{
   height: 10vh;
-} 
+}
 
+
+@media screen and (max-width: 1024px) {
+  .reach{
+    font-size: 1.5em;
+  }
+
+
+  .design{
+    font-size: 1.5em;
+  }
+
+  #sec2{
+    font-size: 1.5em;
+  }
+
+  .logo h1{
+    font-size: 5em;
+  }
+
+  .instruAbout{
+    font-size: 1em;
+  }
+}
 
 @media screen and (max-width: 800px) {
   :root{
@@ -643,35 +346,36 @@ section{
   }
 
   .reach{
-    font-size: 1.6em;
+    font-size: 1.5em;
   }
 
   .design{
-    font-size: 1.6em;
-    padding-left: 30px;
+    font-size: 1.5em;
+    /* padding-left: 30px; */
   }
 
   .logo{
     font-size: 0.9rem;
   }
 
-  .pressureDivs,.flowDivs, .temeratureDivs, .applicationDivs, .heatExchangeDivs,  .samplePreparationDivs{
+  .divs{
     width: 100vw;
     gap: 0.1em;
   }
 
-  .pressureMat, .flowMat, .temperatureMat, .applicationMat, .heatExchangeMat, .sampleMat{
-    width: 30%;
-  }
 
-  :is(.pressureMat, .flowMat, .temperatureMat, .applicationMat, .heatExchangeMat, .superCriticleMat, .sampleMat) a{
+  .divs .mat a{
     display: inline-block;
     width: 100%;
   }
 
-  :is(.pressureMat, .flowMat, .temperatureMat, .applicationMat, .heatExchangeMat, .superCriticleMat, .sampleMat) img{
+  .divs .mat img{
     width: 100%;
     object-fit: contain;
+  }
+
+  .divs .mat span{
+    padding: .7em;
   }
 }
 
@@ -710,12 +414,12 @@ section{
     transform: translate(-50%,-50%);
     height: 100vh;
     gap: 24em;
+    padding-top: 6vh;
   }
 
   .design > div{
     flex-direction: column;
     align-items: center;
-
   }
 
   #sec2{
@@ -723,26 +427,44 @@ section{
     bottom: 150px;
     padding: 0 10px;
   }
-/* 
-  .dummy{
-    min-height: 300vh;
-    
-  } */
 
   #sec3{
     height: fit-content;
   }
 
-
-
   .logo{
     height: fit-content;
     width: 100vw;
-    /* height: 100vh; */
     left: 50%;
-    bottom: 100px;
-    /* top: 0; */
-    /* transform: translateX(0); */
+    bottom: 150px;
     font-size: 0.7rem;
+  }
+
+  .divs{
+    flex-direction: column;
+  }
+
+  .divs .mat{
+    height: auto;
+    width: 100%;
+  }
+
+  .pressureDivs, .flowDivs{
+    --product-count: 4;
+  }
+
+  .temeratureDivs, .samplePreparationDivs{
+    --product-count: 2
+  }
+
+  .superCriticleDivs, .heatExchangeDivs, .applicationDivs{
+    --product-count: 1
+  }
+
+  .divs .mat{
+    height: calc(100% / var(--product-count));
+    background-image: url("/assets/animation_bg.jpg");
+    background-size: cover;
+    background-position: center bottom;
   }
 }
