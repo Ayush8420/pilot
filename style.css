@@ -10,7 +10,18 @@
 .body{
   width: 100%;
   overflow-x: hidden;
+  scroll-snap-type:Y mandatory;
 }
+
+.dummy{
+  scroll-behavior:smooth;
+}
+
+.dummy > .snap{
+  scroll-snap-align:start;
+  outline: 3px solid #fff;
+}
+
 
 .loader{
   z-index: 1000000000;
@@ -173,7 +184,7 @@ section{
   position: fixed;
   left: 50%;
   width: 100vw;
-  bottom: 10%;
+  bottom: -5%;
   text-align: center;
   transform: translateX(-50%);
 }
@@ -181,7 +192,7 @@ section{
 .logo h1{
   font-family: "Orbitron", sans-serif;
   font-weight: 400;
-  font-size: 7em;
+  font-size: clamp(5rem,15vw,13em);
   color: #F05223;
 }
 
@@ -239,6 +250,9 @@ section{
 
 .main{
   pointer-events: none;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
 }
 
 
@@ -327,9 +341,9 @@ section{
     font-size: 1.5em;
   }
 
-  .logo h1{
+  /* .logo h1{
     font-size: 5em;
-  }
+  } */
 
   .instruAbout{
     font-size: 1em;

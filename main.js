@@ -317,7 +317,7 @@ async function main() {
 
 
     //outer animation
-    let model3 = await gltfLoader.loadAsync('assets/diff/model7.glb',
+    let model3 = await gltfLoader.loadAsync('assets/diff/model8.glb',
         (xhr) => {
             console.log("Model", (xhr.loaded / xhr.total * 100) + '% loaded');
         }
@@ -326,11 +326,13 @@ async function main() {
 
     model3.scene.traverse((child) => {
         if (child.isMesh) {
-            if (child.name == 'innerPot' || child.name == 'pot' || child.name == 'innerPotSmall' || child.name == 'innerPotBig') {
+            console.log(child.name)
+            if (child.name == 'innerPot' || child.name == 'pCylinder6' || child.name == 'pSphere4' || child.name == 'pSphere5') {
                 //console.log("tests:", child.name);
                 child.material = greenMaterial
             }
             else {
+                child.position.z = 5
 
                 child.material = orangeMaterial
             }
@@ -339,6 +341,7 @@ async function main() {
     })
     model3.scene.scale.set(35, 35, 35)
     model3.scene.position.y = -3.5;
+    model3.scene.position.x = -23.25;
     model3.scene.position.z = -2.05
 
 
@@ -347,7 +350,7 @@ async function main() {
     if (mobileMedia.matches) {
         tl.to(model3.scene.position, { y: -4.2, duration: 900 }, "start")
     } else {
-        tl.to(model3.scene.position, { y: -3.45, x: .5, duration: 900 }, "start")
+        tl.to(model3.scene.position, { y: -3.45, x: -22.5, duration: 900 }, "start")
     }
 
     //console.log(model3);
@@ -358,7 +361,7 @@ async function main() {
 
 
 
-    const innerPotAction = mixer.clipAction(clips[3]);
+    const innerPotAction = mixer.clipAction(clips[7]);
     innerPotAction.setDuration(5)
     innerPotAction.setLoop(THREE.LoopOnce);
     innerPotAction.repetitions = 2
@@ -368,11 +371,11 @@ async function main() {
     // innerPotAction.setDuration(7);
 
 
+console.log(clips)
 
 
 
-
-    const insidePotBigAction = mixer.clipAction(clips[4]);
+    const insidePotBigAction = mixer.clipAction(clips[0]);
     insidePotBigAction.setLoop(THREE.LoopOnce);
     insidePotBigAction.clampWhenFinished = true;
     insidePotBigAction.play();
@@ -381,7 +384,7 @@ async function main() {
 
 
 
-    const insidePotSmallAction = mixer.clipAction(clips[5]);
+    const insidePotSmallAction = mixer.clipAction(clips[1]);
     insidePotSmallAction.setLoop(THREE.LoopOnce);
     insidePotSmallAction.clampWhenFinished = true;
     insidePotSmallAction.play();
@@ -399,7 +402,7 @@ async function main() {
     if (mobileMedia.matches) {
         tl.to(model3.scene.position, { y: -4, x: .1, duration: 800 }, "start1")
     } else {
-        tl.to(model3.scene.position, { y: -3.5, x: .1, duration: 800 }, "start1")
+        tl.to(model3.scene.position, { y: -3.5, x: -23.25, duration: 800 }, "start1")
     }
 
 
@@ -411,13 +414,13 @@ async function main() {
     potAction.paused = true
 
 
-    tl.fromTo(innerPotAction, { time: 6.25 / 2 }, { time: 6.25, ease: "none", duration: 1000 }, 'start1')
-        .to(insidePotBigAction, { time: 6.25, ease: "none", duration: 200, delay: 100 }, "start2+=50")
-        .to(insidePotSmallAction, { time: 6.25, ease: "none", duration: 200, delay: 100 })
+    tl.fromTo(innerPotAction, { time: 0 }, { time: clips[7].duration, ease: "none", duration: 1000 }, 'start1')
+        .to(insidePotBigAction, { time: clips[0].duration, ease: "none", duration: 200, delay: 100 }, "start2+=50")
+        .to(insidePotSmallAction, { time: clips[1].duration, ease: "none", duration: 200, delay: 100 })
         .to(reach, { opacity: 1, duration: 300, delay: 100 })
         .to(reach, { width: reach.clientWidth, duration: 1, opacity: 1, delay: 100 }, "<")
         .to(reach, { [mobileMedia.matches ? "opacity" : "width"]: 0, duration: 800, delay: 700 })
-        .to(gearAction, { time: 6.25, ease: "none", duration: 1500, delay: 2500 }, 'start2')
+        .to(gearAction, { time: clips[2].duration, ease: "none", duration: 1500, delay: 2500 }, 'start2')
         .to(camera.position, { z: 12, y: 0, ease: "none", duration: 600 })
         .to(design, { opacity: 1, duration: 300, delay: 100 })
         .to(design, { width: design.clientWidth, duration: 1, delay: 100 }, "<")
@@ -427,42 +430,42 @@ async function main() {
 
 
 
-        .to(potAction, { time: 6.25 / 2, duration: 1 }, "-=800")
-        .to(potAction, { time: 6.25, ease: "none", duration: 900 }, "-=800")
+        // .to(potAction, { time: 6.25 / 2, duration: 1 }, "-=800")
+        .to(potAction, { time: clips[6].duration, ease: "none", duration: 900 }, "-=800")
         .to(camera.position, { z: 22, ease: "none", duration: 600, delay: 100 });
 
 
 
 
-    const moonAction = mixer.clipAction(clips[0]);
+    const moonAction = mixer.clipAction(clips[5]);
     moonAction.setLoop(THREE.LoopOnce);
     moonAction.clampWhenFinished = true;
     moonAction.play();
     moonAction.paused = true
 
 
-    tl.to(moonAction, { time: 6.25, ease: "none", duration: 900 }, 'cone')
+    tl.to(moonAction, { time: clips[5].duration, ease: "none", duration: 900 }, 'cone')
         .to(camera.position, { z: 30, ease: "none", duration: 900 }, 'cone');
 
 
-    tl.fromTo(innerPotAction, { time: 0 }, { time: 2 * 6.25, ease: "none", duration: 5000, delay: -1000 }, "cone")
+    // tl.fromTo(innerPotAction, { time: 0 }, { time: 2 * 6.25, ease: "none", duration: 5000, delay: -1000 }, "cone")
 
 
-    const moonGearAction = mixer.clipAction(clips[7]);
+    const moonGearAction = mixer.clipAction(clips[3]);
     moonGearAction.setLoop(THREE.LoopOnce);
     moonGearAction.clampWhenFinished = true;
     moonGearAction.play();
     moonGearAction.paused = true
-    tl.to(moonGearAction, { time: 6.25, ease: "none", duration: 900 }, 'cone');
+    tl.to(moonGearAction, { time: clips[3].duration, ease: "none", duration: 900 }, 'cone');
 
 
 
-    const coneAction = mixer.clipAction(clips[1]);
+    const coneAction = mixer.clipAction(clips[4]);
     coneAction.setLoop(THREE.LoopOnce);
     coneAction.clampWhenFinished = true;
     coneAction.play();
     coneAction.paused = true
-    tl.to(coneAction, { time: 6.25, ease: "none", duration: 900 }, 'cone');
+    tl.to(coneAction, { time: clips[4].duration, ease: "none", duration: 900 }, 'cone');
 
     tl.to(sec2, { opacity: 1, duration: 5 }, "cone+=10")
 
@@ -1033,3 +1036,41 @@ gsap.ticker.add((time) => {
     renderer.render(scene3, camera3);
 
 });
+
+
+
+function debounce(func, timeout = 500){
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
+
+
+let a = window.scrollY;
+const snap = document.querySelectorAll(".dummy .snap")
+let currElem = 0;
+
+const scroll = debounce ((e) => {
+    let b = window.scrollY;
+
+    if(a > b){
+        console.log("up")
+        if (currElem  !== 0){
+            snap[currElem--].scrollIntoView({behavior: 'smooth'})
+        }
+    }else{
+        if (currElem  !== snap.length){
+            snap[currElem++].scrollIntoView({behavior: 'smooth'})
+        }
+        console.log("down")
+    }
+    console.log(currElem)
+    a = window.scrollY;
+})
+
+document.addEventListener("scroll", scroll)
+
+
+
