@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { gsap } from "gsap"
 import Lenis from 'lenis';
+import Snap from 'lenis/snap'
 
 
 
@@ -11,12 +12,9 @@ gsap.registerPlugin(ScrollToPlugin)
 
 
 const lenis = new Lenis({ duration: 5 })
+
+
 lenis.on('scroll', ScrollTrigger.update)
-
-
-function scrollToPosition(position) {
-    lenis.scrollTo(position);
-}
 
 
 let settings = {
@@ -95,48 +93,48 @@ camera.position.x = 0;
 
 const cameraPositions = {
     final: {
-        x: 0,
+        x: 2,
         y: -1.1,
-        z: 35
+        z: 50
     },
     logo: {
         x: 0,
         y: 2.3,
-        z: mobileMedia.matches ? 37 : 29
+        z: mobileMedia.matches ? 37 : 38
     },
     gearOne: {
-        x: -2.2,
-        y: 9,
+        x: 3,
+        y: 10,
         z: -1
     },
     gearTwo: {
-        x: 1.2,
+        x: -2.2,
         y: 9.5,
         z: -1
     },
     gearThree: {
-        x: 5,
+        x: -5.5,
         y: 7.1,
         z: -1
     },
     gearFour: {
-        x: 6,
-        y: 3.8,
+        x: -8,
+        y: 2.5,
         z: -1
     },
     gearFive: {
-        x: 4.5,
-        y: 0.5,
+        x: -6.8,
+        y: -3,
         z: -1
     },
     gearSix: {
-        x: 1.8,
-        y: -1.5,
+        x: -2.5,
+        y: -6,
         z: -1
     },
     gearSeven: {
-        x: -2.1,
-        y: -1.5,
+        x: 2.5,
+        y: -6,
         z: -1
     },
 }
@@ -145,8 +143,8 @@ THREE.ColorManagement.legacyMode = false;
 const textureLoader = new THREE.TextureLoader()
 
 let meshTexture = textureLoader.load('./assets/bakingText.jpg')
-let earthTexture = textureLoader.load('./assets/diff/Frame 61.jpg')
-let innerEarthTexture = textureLoader.load('./assets/diff/Frame 60.jpg')
+let earthTexture = textureLoader.load('./assets/diff/Frame 65.jpg')
+let innerEarthTexture = textureLoader.load('./assets/diff/Frame 63.jpg')
 earthTexture.flipY = false
 innerEarthTexture.flipY = false
 meshTexture.flipY = false
@@ -180,7 +178,6 @@ var tl = gsap.timeline({
         start: "top top",
         end: "bottom bottom",
         scrub: 5,
-
     },
 });
 
@@ -235,7 +232,7 @@ tl.to(instruAbout, { opacity: 1, duration: 100 }, "start+=500")
     .to(instruAbout, { opacity: 0, duration: 100 });
 
 
-let textTexture = textureLoader.load('./assets/text2.png')
+let textTexture = textureLoader.load('./assets/text5.svg')
 textTexture.flipY = false
 const textMaterial = new THREE.MeshBasicMaterial({ transparent: true, map: textTexture })
 
@@ -296,7 +293,7 @@ async function main() {
     innerEarth.scene.scale.set(0.151, 0.151, 0.151)
     scene.add(innerEarth.scene);
     const iMesh = innerEarth.scene
-    iMesh.position.y -= 0.1
+    iMesh.position.y -= 0.2
     iMesh.position.z -= 1
     iMesh.rotation.y = 1 * Math.PI
 
@@ -317,7 +314,7 @@ async function main() {
 
 
     //outer animation
-    let model3 = await gltfLoader.loadAsync('assets/diff/model8.glb',
+    let model3 = await gltfLoader.loadAsync('assets/diff/model15.glb',
         (xhr) => {
             console.log("Model", (xhr.loaded / xhr.total * 100) + '% loaded');
         }
@@ -327,7 +324,7 @@ async function main() {
     model3.scene.traverse((child) => {
         if (child.isMesh) {
             console.log(child.name)
-            if (child.name == 'innerPot' || child.name == 'pCylinder6' || child.name == 'pSphere4' || child.name == 'pSphere5') {
+            if (child.name == 'innerPot' || child.name == 'jar_shape' || child.name == 'pSphere4' || child.name == 'pSphere5') {
                 //console.log("tests:", child.name);
                 child.material = greenMaterial
             }
@@ -340,7 +337,7 @@ async function main() {
         }
     })
     model3.scene.scale.set(35, 35, 35)
-    model3.scene.position.y = -3.5;
+    model3.scene.position.y = -7.5;
     model3.scene.position.x = -23.25;
     model3.scene.position.z = -2.05
 
@@ -348,9 +345,9 @@ async function main() {
     model3.scene
 
     if (mobileMedia.matches) {
-        tl.to(model3.scene.position, { y: -4.2, duration: 900 }, "start")
+        tl.to(model3.scene.position, { y: -7.2, duration: 900 }, "start")
     } else {
-        tl.to(model3.scene.position, { y: -3.45, x: -22.5, duration: 900 }, "start")
+        tl.to(model3.scene.position, { y: -7, x: -22.5, duration: 900 }, "start")
     }
 
     //console.log(model3);
@@ -361,7 +358,7 @@ async function main() {
 
 
 
-    const innerPotAction = mixer.clipAction(clips[7]);
+    const innerPotAction = mixer.clipAction(clips[5]);
     innerPotAction.setDuration(5)
     innerPotAction.setLoop(THREE.LoopOnce);
     innerPotAction.repetitions = 2
@@ -371,7 +368,7 @@ async function main() {
     // innerPotAction.setDuration(7);
 
 
-console.log(clips)
+    console.log(clips)
 
 
 
@@ -400,9 +397,9 @@ console.log(clips)
 
 
     if (mobileMedia.matches) {
-        tl.to(model3.scene.position, { y: -4, x: .1, duration: 800 }, "start1")
+        tl.to(model3.scene.position, { y: -7.3, duration: 800 }, "start1")
     } else {
-        tl.to(model3.scene.position, { y: -3.5, x: -23.25, duration: 800 }, "start1")
+        tl.to(model3.scene.position, { y: -7, x: -23.25, duration: 800 }, "start1")
     }
 
 
@@ -414,7 +411,7 @@ console.log(clips)
     potAction.paused = true
 
 
-    tl.fromTo(innerPotAction, { time: 0 }, { time: clips[7].duration, ease: "none", duration: 1000 }, 'start1')
+    tl.fromTo(innerPotAction, { time: 0 }, { time: clips[5].duration, ease: "none", duration: 1000 }, 'start1')
         .to(insidePotBigAction, { time: clips[0].duration, ease: "none", duration: 200, delay: 100 }, "start2+=50")
         .to(insidePotSmallAction, { time: clips[1].duration, ease: "none", duration: 200, delay: 100 })
         .to(reach, { opacity: 1, duration: 300, delay: 100 })
@@ -437,15 +434,15 @@ console.log(clips)
 
 
 
-    const moonAction = mixer.clipAction(clips[5]);
+    const moonAction = mixer.clipAction(clips[4]);
     moonAction.setLoop(THREE.LoopOnce);
     moonAction.clampWhenFinished = true;
     moonAction.play();
     moonAction.paused = true
 
 
-    tl.to(moonAction, { time: clips[5].duration, ease: "none", duration: 900 }, 'cone')
-        .to(camera.position, { z: 30, ease: "none", duration: 900 }, 'cone');
+    tl.to(moonAction, { time: clips[4].duration, ease: "none", duration: 900 }, 'cone')
+        .to(camera.position, { z: 40, ease: "none", duration: 900 }, 'cone');
 
 
     // tl.fromTo(innerPotAction, { time: 0 }, { time: 2 * 6.25, ease: "none", duration: 5000, delay: -1000 }, "cone")
@@ -460,21 +457,21 @@ console.log(clips)
 
 
 
-    const coneAction = mixer.clipAction(clips[4]);
+    const coneAction = mixer.clipAction(clips[7]);
     coneAction.setLoop(THREE.LoopOnce);
     coneAction.clampWhenFinished = true;
     coneAction.play();
     coneAction.paused = true
-    tl.to(coneAction, { time: clips[4].duration, ease: "none", duration: 900 }, 'cone');
+    tl.to(coneAction, { time: clips[7].duration, ease: "none", duration: 900 }, 'cone');
 
     tl.to(sec2, { opacity: 1, duration: 5 }, "cone+=10")
 
 
         .to(camera.position, { ...cameraPositions.final, duration: 800 }, 'cone+=2000');
-    tl.from(logo, { y: 200, duration: 800 }, 'cone+=2000')
+    tl.from(logo, { y: 0, duration: 800 }, 'cone+=2000')
     tl.to(sec2, { opacity: 0, duration: 200, delay: 30 }, "cone+=1800")
 
-    tl.to(logo, { y: 200, delay: 15, duration: 500, delay: 500 }, 'logoHide')
+    tl.to(logo, { y: 0, delay: 15, duration: 500, delay: 500 }, 'logoHide')
     tl.to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 500, }, 'logoHide+=500')
 
     scene.add(model3.scene);
@@ -492,30 +489,25 @@ console.log(clips)
     })
 
     if (mobileMedia.matches) {
-        gltf.scene.position.y = -3.8
+        gltf.scene.position.y = -4.2
     } else {
-        gltf.scene.position.y = -3.5;
+        gltf.scene.position.y = -4;
     }
 
     gltf.scene.position.z = -10
+    gltf.scene.position.x = -0.25
     gltf.scene.scale.set(35, 35, 35)
     gsap.set(gltf.scene.children[0].material, { opacity: 0 })
 
-    //remember
     tl.to(gltf.scene.position, { z: -2.05, duration: 1 }, "logoHide")
 
-
-    // alert("hii")
-    //Temp code (remove if afterwards)
-
-    // tl.to(gltf.scene.children[0].material, { opacity: 1, duration: 600, delay: 600 }, 'logoHide+=10')
 
     scene.add(gltf.scene)
 
     // Gear 1 Animations
 
-    tl.to(gltf.scene.rotation, { z: .3, delay: 1300, duration: 1000, }, "gear1")
-    tl.to(model3.scene.rotation, { z: .3, delay: 1300, duration: 1000, }, "gear1")
+    // tl.to(gltf.scene.rotation, { z: .3, delay: 1300, duration: 1000, }, "gear1")
+    // tl.to(model3.scene.rotation, { z: .3, delay: 1300, duration: 1000, }, "gear1")
 
 
     tl.to(gltf.scene.children[0].material, { opacity: 1, duration: 600, delay: 600 }, 'logoHide+=10')
@@ -574,15 +566,15 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear1Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear1Done")
 
         // Gear 2 Animations
         .to(camera.position, { ...cameraPositions.gearTwo, ease: "none", duration: 1000, delay: 2500 }, "gearTwo")
 
 
-    tl.to(model3.scene.rotation, { z: -.3, duration: 1000, delay: 2500 }, "gearTwo")
-    tl.to(gltf.scene.rotation, { z: -.3, duration: 1000, delay: 2500 }, "gearTwo")
+    // tl.to(model3.scene.rotation, { z: -.3, duration: 1000, delay: 2500 }, "gearTwo")
+    // tl.to(gltf.scene.rotation, { z: -.3, duration: 1000, delay: 2500 }, "gearTwo")
         .to('.shutter', {
             opacity: 1,
             duration: 150
@@ -628,8 +620,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear2Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear2Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear2Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear2Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear2Done")
 
 
         // Gear 3 Animations
@@ -638,8 +630,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.gearThree, ease: "none", duration: 1000, delay: 2500 }, "gearThree")
 
 
-    tl.to(model3.scene.rotation, { z: -1, duration: 1000, delay: 2500 }, "gearThree")
-    tl.to(gltf.scene.rotation, { z: -1, duration: 1000, delay: 2500 }, "gearThree")
+    // tl.to(model3.scene.rotation, { z: -1, duration: 1000, delay: 2500 }, "gearThree")
+    // tl.to(gltf.scene.rotation, { z: -1, duration: 1000, delay: 2500 }, "gearThree")
         .to('.shutter', {
             opacity: 1,
             duration: 150
@@ -685,8 +677,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear3Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear3Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear3Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear3Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear3Done")
 
 
 
@@ -696,8 +688,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.gearFour, ease: "none", duration: 1000, delay: 2500 }, "gearFour")
 
 
-    tl.to(model3.scene.rotation, { z: -1.6, duration: 1000, delay: 2500 }, "gearFour")
-    tl.to(gltf.scene.rotation, { z: -1.6, duration: 1000, delay: 2500 }, "gearFour")
+    // tl.to(model3.scene.rotation, { z: -1.6, duration: 1000, delay: 2500 }, "gearFour")
+    // tl.to(gltf.scene.rotation, { z: -1.6, duration: 1000, delay: 2500 }, "gearFour")
         .to('.shutter', {
             opacity: 1,
             duration: 150
@@ -743,8 +735,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear4Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear4Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear4Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear4Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear4Done")
 
 
 
@@ -754,8 +746,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.gearFive, ease: "none", duration: 1000, delay: 2500 }, "gearFive")
 
 
-    tl.to(model3.scene.rotation, { z: -2.2, duration: 1000, delay: 2500 }, "gearFive")
-    tl.to(gltf.scene.rotation, { z: -2.2, duration: 1000, delay: 2500 }, "gearFive")
+    // tl.to(model3.scene.rotation, { z: -2.2, duration: 1000, delay: 2500 }, "gearFive")
+    // tl.to(gltf.scene.rotation, { z: -2.2, duration: 1000, delay: 2500 }, "gearFive")
         .to('.shutter', {
             opacity: 1,
             duration: 150
@@ -801,8 +793,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear5Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear5Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear5Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear5Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear5Done")
 
 
         // Gear 6 Animations
@@ -811,8 +803,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.gearSix, ease: "none", duration: 1000, delay: 2500 }, "gearSix")
 
 
-    tl.to(model3.scene.rotation, { z: -2.8, duration: 1000, delay: 2500 }, "gearSix")
-    tl.to(gltf.scene.rotation, { z: -2.8, duration: 1000, delay: 2500 }, "gearSix")
+    // tl.to(model3.scene.rotation, { z: -2.8, duration: 1000, delay: 2500 }, "gearSix")
+    // tl.to(gltf.scene.rotation, { z: -2.8, duration: 1000, delay: 2500 }, "gearSix")
         .to('.shutter', {
             opacity: 1,
             duration: 150
@@ -858,8 +850,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear6Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear6Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear6Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear6Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear6Done")
 
 
         // Gear 7 Animations
@@ -868,8 +860,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.gearSeven, ease: "none", duration: 1000, delay: 2500 }, "gearSeven")
 
 
-    tl.to(model3.scene.rotation, { z: -3.4, duration: 1000, delay: 2500 }, "gearSeven")
-    tl.to(gltf.scene.rotation, { z: -3.4, duration: 1000, delay: 2500 }, "gearSeven")
+    // tl.to(model3.scene.rotation, { z: -3.4, duration: 1000, delay: 2500 }, "gearSeven")
+    // tl.to(gltf.scene.rotation, { z: -3.4, duration: 1000, delay: 2500 }, "gearSeven")
         .to('.shutter', {
             opacity: 1,
             duration: 150
@@ -915,8 +907,8 @@ console.log(clips)
         .to(camera.position, { ...cameraPositions.logo, ease: "none", duration: 1000 }, "gear7Done")
 
 
-    tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear7Done")
-    tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear7Done")
+    // tl.to(model3.scene.rotation, { z: 0, duration: 1000, }, "gear7Done")
+    // tl.to(gltf.scene.rotation, { z: 0, duration: 1000, }, "gear7Done")
 }
 
 main().then(() => {
@@ -924,7 +916,9 @@ main().then(() => {
 }).catch((err) => {
     console.error("Opps!", err)
 }).finally(() => {
-    document.querySelector(".loader").classList.add("done");
+    setTimeout(() => {
+        document.querySelector(".loader").classList.add("done");
+    },5000)
 })
 
 document.querySelector(".loader").addEventListener("transitionend", () => {
@@ -1039,38 +1033,34 @@ gsap.ticker.add((time) => {
 
 
 
-function debounce(func, timeout = 500){
+function debounce(func, timeout = 5500) {
     let timer;
     return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
     };
 }
 
-
-let a = window.scrollY;
-const snap = document.querySelectorAll(".dummy .snap")
-let currElem = 0;
-
-const scroll = debounce ((e) => {
-    let b = window.scrollY;
-
-    if(a > b){
-        console.log("up")
-        if (currElem  !== 0){
-            snap[currElem--].scrollIntoView({behavior: 'smooth'})
+function throttle(func, delay = 5500) {
+    let timeout = null
+    return () => {
+        if (!timeout) {
+            func()
+            timeout = setTimeout(() => {
+                timeout = null
+            }, delay)
         }
-    }else{
-        if (currElem  !== snap.length){
-            snap[currElem++].scrollIntoView({behavior: 'smooth'})
-        }
-        console.log("down")
     }
-    console.log(currElem)
-    a = window.scrollY;
+}
+
+
+
+
+const snapEle = Array.from(document.querySelectorAll(".dummy .snap"))
+const snap = new Snap(lenis, { type : 'proximity', })
+
+snapEle.forEach((elem) => {
+    snap.addElement(elem, {_gsap: tl,align: "start"})
 })
-
-document.addEventListener("scroll", scroll)
-
 
 

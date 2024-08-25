@@ -3,23 +3,41 @@
 * {
   padding: 0;
   margin: 0;
+  /* outline: 1px solid; */
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
+/* 
+html,body{
+  height: 100vh;
+  overflow: hidden;
+} */
+
 
 .body{
   width: 100%;
-  overflow-x: hidden;
-  scroll-snap-type:Y mandatory;
+  /* position: relative; */
 }
 
 .dummy{
-  scroll-behavior:smooth;
+  height: 9900px;
+  pointer-events: none;
+}
+
+.main{
+  position: relative;
+  width: 100%;
+  height: 100vh;
 }
 
 .dummy > .snap{
-  scroll-snap-align:start;
-  outline: 3px solid #fff;
+  /* outline: 3px solid #fff; */
+  
+  z-index: 1000000000000;
+}
+
+.parts{
+  position: absolute;
 }
 
 
@@ -38,12 +56,44 @@
 }
 
 .loader .spinner{
-  height: 90px;
+  /* height: 90px;
   width: 90px;
   border-radius: 50%;
   border: 5px solid #fff;
   border-top-color:transparent;
-  animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear; */
+
+
+  /* HTML: <div class="loader"></div> */
+}
+/* HTML: <div class="loader"></div> */
+.loader .spinner {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  color: #F05223;
+  background: radial-gradient(farthest-side, currentColor calc(100% - 6px),#0000 calc(100% - 5px) 0);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 13px),#000 calc(100% - 12px));
+  border-radius: 50%;
+  animation: l19 2s infinite linear;
+  scale: 2;
+}
+.loader .spinner::before,
+.loader .spinner::after {    
+  content: "";
+  grid-area: 1/1;
+  background:
+    linear-gradient(currentColor 0 0) center,
+    linear-gradient(currentColor 0 0) center;
+  background-size: 100% 10px,10px 100%;
+  background-repeat: no-repeat;
+}
+.loader .spinner::after {
+   transform: rotate(45deg);
+}
+
+@keyframes l19 { 
+  100%{transform: rotate(1turn)}
 }
 
 @keyframes spin {
@@ -57,26 +107,24 @@
   
 }
 
-.loader.done{
+ .loader.done{
   opacity: 0;
 }
 
-.dummy{
-  min-height: 1200vh;
-  pointer-events: none;
-}
 
-html, body{
-  height: 100vh;
-  height: 100svh;
-  height: -webkit-fill-available;
+
+html{
+  width: 100%;
 }
 
 body {
   background-color: #0f2c49;
-  width: 100vw;
-  overflow-y: auto;
+  width: 100%;
   overflow-x: hidden;
+}
+
+#sec1{
+  overflow: hidden;
 }
 
 section{
@@ -159,7 +207,7 @@ section{
   align-items: center;
   justify-content: center;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(-50% - 20px), -50%);
   width: fit-content;
   opacity: 0;
   overflow-x: hidden;
@@ -183,10 +231,10 @@ section{
   font-family: "Orbitron", sans-serif;
   position: fixed;
   left: 50%;
-  width: 100vw;
-  bottom: -5%;
+  width: 100%;
+  top: 100%;
   text-align: center;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-250px) ;
 }
 
 .logo h1{
@@ -205,11 +253,11 @@ section{
 #sec2{
   text-transform: uppercase;
   position: fixed;
-  bottom: 30px;
+  bottom: 50px;
   left: 0;
   color: #fff;
   font-size: 2em;
-  width: 100vw;
+  width: 100%;
   height: fit-content;
   display: inline;
   text-align: center;
@@ -237,7 +285,7 @@ section{
 
 .shutter {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-color: #F05223;
   object-fit: cover;
   z-index: 30;
@@ -260,6 +308,16 @@ section{
   pointer-events: none;
   opacity: 0;
 }
+
+
+  #sec2{
+    bottom: 100px;
+  }
+
+  .logo{
+    bottom: 80px;
+  }
+
 
 .divs{
   display: flex;
@@ -289,7 +347,15 @@ section{
 }
 
 .divs .mat:not(:last-child){
-  border-right: 3px solid rgba(255, 255, 255, 0.44);;
+  /* border-right: 3px solid rgba(255, 255, 255, 0.44);; */
+}
+
+.divs .mat:first-child a{
+  padding-left: 100px;
+}
+
+.divs .mat:last-child a{
+  padding-right: 100px;
 }
 
 .divs .mat a{
@@ -306,12 +372,12 @@ section{
   height: 100%;
   object-fit: contain;
   object-position: bottom;
-  transform: scale(1);
+  transform: scale(.8);
   transition: transform 0.4s;
 }
 
 .divs .mat:hover a img{
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
 
@@ -322,8 +388,17 @@ section{
   width: 100%;
 }
 
-.triggerSceneChange{
-  height: 10vh;
+
+.applicationDivs .applicationMat a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.applicationDivs .applicationMat a img{
+  width: calc(100% - 50px);
+  max-width: 800px;
+  object-position: center;
 }
 
 
@@ -373,7 +448,7 @@ section{
   }
 
   .divs{
-    width: 100vw;
+    width: 100%;
     gap: 0.1em;
   }
 
@@ -400,7 +475,7 @@ section{
   }
 
   .instruAbout{
-    width: 100vw;
+    width: 100%;
     left: 0;
     top: 10%;
     transform: translate(0,0);
@@ -427,14 +502,28 @@ section{
     left: 50%;
     transform: translate(-50%,-50%);
     height: 100vh;
-    gap: 24em;
     padding-top: 6vh;
   }
 
   .design > div{
     flex-direction: column;
     align-items: center;
+    gap: 22em;
   }
+
+  
+.divs .mat:first-child a{
+  padding-left: 0;
+}
+
+.divs .mat:last-child a{
+  padding-right: 0;
+}
+
+
+.divs .mat a img{
+  scale: 1;
+}
 
   #sec2{
     height: fit-content;
@@ -448,9 +537,9 @@ section{
 
   .logo{
     height: fit-content;
-    width: 100vw;
+    width: 100%;
     left: 50%;
-    bottom: 150px;
+    bottom: 100px;
     font-size: 0.7rem;
   }
 
@@ -463,15 +552,16 @@ section{
     width: 100%;
   }
 
+
   .pressureDivs, .flowDivs{
-    --product-count: 4;
+    --product-count: 5;
   }
 
-  .temeratureDivs, .samplePreparationDivs{
+  .temeratureDivs, .samplePreparationDivs,  .superCriticleDivs{
     --product-count: 2
   }
 
-  .superCriticleDivs, .heatExchangeDivs, .applicationDivs{
+  .heatExchangeDivs, .applicationDivs{
     --product-count: 1
   }
 
