@@ -553,11 +553,11 @@ section{
   }
 
 
-  .pressureDivs, .flowDivs{
+  .pressureDivs{
     --product-count: 5;
   }
 
-  .temeratureDivs, .samplePreparationDivs,  .superCriticleDivs{
+  .temeratureDivs, .flowDivs, .samplePreparationDivs,  .superCriticleDivs{
     --product-count: 2
   }
 
